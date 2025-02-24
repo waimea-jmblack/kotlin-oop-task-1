@@ -92,6 +92,8 @@ class Gnome(val name: String, var step: Int) {
         return ""
     }
 
+    val jim = Gnome("Jim", 1)
+
     /**
      * Shift the gnome to a given step
      * If the step is occupied, don't move
