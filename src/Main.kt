@@ -2,7 +2,7 @@
  * ================================================
  * Garden Gnomes
  *
- * A bunch of gnomes have appeared in your garden!
+ * A bunch of gnomes has appeared in your garden!
  *
  *    /\      /\      /\
  *   ('')    (oo)    (xx)
@@ -170,4 +170,9 @@ class Gnome(val name: String, var activity: String) {
 
     }
 }
+
+
+
+
+
 
