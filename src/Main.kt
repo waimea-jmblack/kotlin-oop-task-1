@@ -9,16 +9,15 @@
  * __{__}____{__}____{__}__
  *
  * Each gnome has a particular activity that it
- * specialises in: fishing, digging, smoking a
+ * specializes in: fishing, digging, smoking a
  * pipe, etc.
  *
- * Gnomes are generally friendly little things, but
+ * Gnomes are generally friendly little creatures, but
  * they do have a bad temper when provoked. If you
  * poke them, they will get cross. Often a pat on
- * head can help calm them down
+ * the head can help calm them down.
  * ================================================
  */
-
 
 fun main() {
     println("Gnomes")
@@ -32,7 +31,7 @@ fun main() {
 
     println("------------------------")
 
-    // Checking gnome anger
+    // Checking gnome anger levels
 
     check(jim.angerLevel == 1)
     check(sam.angerLevel == 1)
@@ -73,16 +72,15 @@ fun main() {
     check(jim.angerLevel == 10)
     check(jim.anger() == "apoplectic")
 
-    sam.poke(5)                     // Should now angry
+    sam.poke(5)                     // Should now be angry
     println(sam.info())
     check(sam.angerLevel == 6)
     check(sam.anger() == "angry")
 
-    amy.poke(7)                     // Should now furious
+    amy.poke(7)                     // Should now be furious
     println(amy.info())
     check(amy.angerLevel == 8)
     check(amy.anger() == "furious")
-
 
     println("------------------------")
 
@@ -107,16 +105,14 @@ fun main() {
     println(amy.info())
     check(amy.angerLevel == 1)
     check(amy.anger() == "calm")
-
 }
-
 
 /**
  * Gnome class
  *
  * Gnomes are instantiated with a name and
- * an action (e.g. fishing) and have their
- * anger level initially set to 1 (calm)
+ * an action (e.g., fishing), and their
+ * anger level is initially set to 1 (calm).
  */
 class Gnome(val name: String, var activity: String) {
     var angerLevel = 1
@@ -130,7 +126,7 @@ class Gnome(val name: String, var activity: String) {
      *  NAME is ACTIVITY and is ANGER WORD
      */
     fun info(): String {
-        return ""
+        return "$name is $activity and is ${anger()}"
     }
 
     /**
@@ -142,37 +138,39 @@ class Gnome(val name: String, var activity: String) {
      * - 9-10 -> apoplectic
      */
     fun anger(): String {
-        return ""
+        return when (angerLevel) {
+            in 1..2 -> "calm"
+            in 3..4 -> "annoyed"
+            in 5..6 -> "angry"
+            in 7..8 -> "furious"
+            else -> "apoplectic"
+        }
     }
 
     /**
      * Poking a gnome makes it angrier
-     * The anger level goes up 1 for
-     * every poke, up to a max of 10
+     * The anger level goes up by 1 for
+     * every poke, up to a max of 10.
      */
     fun poke(numPokes: Int) {
         println("$name gets poked $numPokes times...")
-
-
+        angerLevel = (angerLevel + numPokes).coerceAtMost(10) // Increase anger but limit it to 10
     }
 
     /**
      * Patting a gnome makes it calmer
-     * The anger level goes down 1 for
-     * every pat, down to a min of 1
+     * The anger level goes down by 1 for
+     * every pat, down to a minimum of 1.
      * However, if more than 10 pats are
      * given in one go, the anger level
      * will go to 10 instantly!
      */
     fun pat(numPats: Int) {
         println("$name gets patted $numPats times...")
-
-
+        if (numPats > 10) {
+            angerLevel = 10 // Too many pats set anger to max
+        } else {
+            angerLevel = (angerLevel - numPats).coerceAtLeast(1) // Decrease anger but limit it to 1
+        }
     }
 }
-
-
-
-
-
-
